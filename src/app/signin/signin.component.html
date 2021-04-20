@@ -1,0 +1,58 @@
+<ion-row class="signin-container">
+  <ion-col class="ion-align-self-center">
+    <ion-card class="signin-card">
+      <img class="signin-logo" src="../../assets/svg/user.svg"/>
+      <ion-card-content>
+        <ion-card-title>
+          Sign in
+          </ion-card-title>
+      </ion-card-content>
+    </ion-card>
+    <form [formGroup]="signInForm" (ngSubmit)="signInSubmit()"> 
+      <ion-item>
+        <ion-label>Email: </ion-label>
+        <ion-input type="email" name="email" formControlName="email">
+        </ion-input>
+      </ion-item>
+      <span class="error" *ngIf="isSubmitted && errorControl.email.errors?.required">Please enter an valid email</span>
+      <ion-item>
+        <ion-label>Password: </ion-label>
+        <ion-input type="password" name="password" formControlName="password"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="isSubmitted && errorControl.password.errors?.required">Please enter an valid password</span>
+      <ion-row align-items-center>
+        <ion-col align-self-center class="sm-col">
+          <ion-button shape="round" class="signin-btn email-signin-btn" type="submit" expand="block">Sign in</ion-button>
+        </ion-col>
+      </ion-row>
+      <span class="error" *ngIf="userAccountExists">Please enter an valid password</span>
+    </form>    <ion-row class="sm-row" align-items-center>
+      <ion-col align-self-center class="sm-col">
+        <div class="password-reset-container">
+          <p class="password-reset-text">Forgot your password?</p>
+          <ion-button fill="clear" class="password-reset-cta" (click)="gotoPasswordReset()">reset</ion-button>  
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="sm-row" align-items-center>
+      <ion-col align-self-center class="sm-col">
+        <ion-button shape="round" class="signin-btn signin-sm-fb" (click)="signinWithFB()"><img src="../../assets/svg/facebook.svg" alt=""><span>Signin with Facebook</span></ion-button>
+        <ion-button shape="round" class="signin-btn signin-sm-in" (click)="signinWithGoogle()"><img src="../../assets/svg/google.svg" alt=""><span>Signin with Google</span></ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="sm-row" align-items-center>
+      <ion-col align-self-center class="sm-col">
+        <div class="sign-up-container">
+          <p class="sign-up-text">Not a user yet?</p>
+          <ion-button fill="clear" class="sign-up-cta" (click)="gotoSignup()">sign up</ion-button>  
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="sm-row" align-items-center>
+      <ion-col align-self-center class="user-acc-col">
+        <span class="user-acc-error" *ngIf="userAccountValidate">{{userAccountError}}</span>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+</ion-row>

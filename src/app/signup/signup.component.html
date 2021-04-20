@@ -1,0 +1,55 @@
+<ion-row class="signup-container">
+  <ion-col class="ion-align-self-center">
+    <ion-card class="signup-card">
+      <img class="signup-logo" src="../../assets/svg/sign-up.svg"/>
+      <ion-card-content>
+        <ion-card-title>
+          Sign in
+          </ion-card-title>
+      </ion-card-content>
+    </ion-card>
+    <form [formGroup]="signUpForm" (ngSubmit)="signUpSubmit()"> 
+      <ion-item>
+        <ion-label>Email: </ion-label>
+        <ion-input type="email" name="email" formControlName="email"> 
+        </ion-input>
+      </ion-item>
+      <span class="error" *ngIf="isSubmitted && errorControl.email.errors?.required">Please enter an valid email</span>
+      <ion-item>
+        <ion-label>Confirm Email: </ion-label>
+        <ion-input type="email" name="confirmEmail" formControlName="confirmEmail">
+        </ion-input>  
+      </ion-item>
+      <span class="error" *ngIf="isSubmitted && errorControl.confirmEmail.errors?.required">Please enter an valid email</span>
+      <span class="error" *ngIf="errorControl.confirmEmail?.errors?.confirmEmail?.valid==false">Email does not match</span>
+      <ion-item>
+        <ion-label>Password: </ion-label>
+        <ion-input type="password" name="password" formControlName="password"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="isSubmitted && errorControl.password.errors?.confirmPassword?.valid">Please enter an valid password</span>
+      <ion-item>
+        <ion-label>Confirm Password: </ion-label>
+        <ion-input type="password" name="confirmPassword" formControlName="confirmPassword"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="isSubmitted && errorControl.confirmPassword.errors?.required">Please enter a valid password</span>
+      <span class="error" *ngIf="errorControl.confirmPassword.errors?.confirmPassword?.valid==false">Passwords doesn't match</span>
+      <ion-row align-items-center>
+        <ion-col align-self-center class="sm-col">
+          <ion-button shape="round" class="signup-btn email-signup-btn" type="submit" expand="block">Sign up</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row align-items-center>
+        <ion-col align-self-center class="user-acc-col">
+          <span class="user-acc-error" *ngIf="userAccountExists">User account already exists</span>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <ion-row class="sm-row" align-items-center>
+      <ion-col align-self-center class="sm-col">
+        <ion-button shape="round" class="signup-btn signup-sm-fb" (click)="signupWithFB()"><img src="../../assets/svg/facebook.svg" alt=""><span>Signup with Facebook</span></ion-button>
+        <ion-button shape="round" class="signup-btn signup-sm-in" (click)="signupWithGoogle()"><img src="../../assets/svg/google.svg" alt="" ><span>Signup with Google</span></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+</ion-row>

@@ -1,0 +1,40 @@
+<ion-row class="password-reset-email-container" *ngIf="ispasswordResetEmail">
+  <ion-col class="ion-self-align-center">
+    <form [formGroup]="passwordResetEmailForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label>Email:</ion-label>
+        <ion-input type="email" name="email" formControlName="email"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="errorControl.email==null && errorControl.email.errors?.required">Please enter an valid email</span>
+      <ion-row align-items-center>
+        <ion-col align-self-center class="sm-col">
+          <ion-button shape="round" class="password-reset-btn " type="submit" expand="block">Send password link</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-col>
+</ion-row>
+
+<ion-row class="password-reset-container" *ngIf="!ispasswordResetEmail">
+  <ion-col class="ion-align-self-center">
+
+    <form [formGroup]="passwordResetForm" (ngSubmit)="passwordResetSubmit()"> 
+      <ion-item>
+        <ion-label>New Password: </ion-label>
+        <ion-input type="password" name="password" formControlName="password"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="isSubmitted && passwordErrorControl.password.errors?.confirmPassword?.valid">Please enter an valid password</span>
+      <ion-item>
+        <ion-label>Confirm Password: </ion-label>
+        <ion-input type="password" name="confirmPassword" formControlName="confirmPassword"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="isSubmitted && passwordErrorControl.confirmPassword.errors?.required">Please enter a valid password</span>
+      <span class="error" *ngIf="passwordErrorControl.confirmPassword.errors?.confirmPassword?.valid==false">Passwords doesn't match</span>
+      <ion-row align-items-center>
+        <ion-col align-self-center class="sm-col">
+          <ion-button shape="round" class="signin-btn email-signin-btn" type="submit" expand="block">Change password</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-col>
+</ion-row>
